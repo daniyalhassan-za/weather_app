@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Card</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .btn-yellow {
+            background-color: #ffd700;
+            color: #fff;
+        }
+        .btn-yellow:hover {
+            background-color: #ffcc00;
+        }
+        .card-box {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="row d-flex justify-content-center py-5">
+    <div class="col-md-8 col-lg-6 col-xl-5">
+        <!-- Check Weather Box -->
+        <div class="card text-body card-box" style="border-radius: 35px;">
+            <div class="card-body p-4">
+                <form action="/" method="get">
+                    <div class="form-group">
+                        <label for="city">Enter City Name:</label>
+                        <input type="text" class="form-control" id="city" name="city" required>
+                    </div>
+                    <button type="submit" class="btn btn-yellow mt-3">Get Weather</button>
+                </form>
+            </div>
+        </div>
+        <!-- Weather Result Box -->
+        {% if weather_data %}
+        <div class="card text-body card-box" style="border-radius: 35px;">
+            <div class="card-body p-4">
+                <div class="d-flex">
+                    <h6 class="flex-grow-1">{{ weather_data.city }}</h6>
+                </div>
+                <div class="d-flex flex-column text-center mt-5 mb-4">
+                    <h6 class="display-4 mb-0 font-weight-bold">{{ weather_data.temperature }}°C</h6>
+                    <span class="small" style="color: #868B94;">{{ weather_data.weather }}</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1" style="font-size: 1rem;">
+                        <div>
+                            <i class="fas fa-wind fa-fw" style="color: #868B94;"></i>
+                            <span class="ms-1">{{ weather_data.wind_speed }} km/h</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-tint fa-fw" style="color: #868B94;"></i>
+                            <span class="ms-1">{{ weather_data.humidity }}%</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-sun fa-fw" style="color: #868B94;"></i>
+                            <span class="ms-1">Sunrise: {{ weather_data.sunrise }}</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-sun fa-fw" style="color: #868B94;"></i>
+                            <span class="ms-1">Sunset: {{ weather_data.sunset }}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <img id="weather-icon" src="" width="100px" alt="Weather Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const weatherDescriptions = {
+                "clear sky": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp",
+                "few clouds": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu2.webp",
+                "scattered clouds": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp",
+                "broken clouds": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu4.webp",
+                "shower rain": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu5.webp",
+                "rain": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu6.webp",
+                "thunderstorm": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu7.webp",
+                "snow": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu8.webp",
+                "mist": "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu9.webp"
+            };
+
+            const weatherDescription = "{{ weather_data.weather }}".toLowerCase();
+            const weatherIcon = weatherDescriptions[weatherDescription] || "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp";
+            document.getElementById("weather-icon").src = weatherIcon;
+        </script>
+        {% endif %}
+    </div>
+</div>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
