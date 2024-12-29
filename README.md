@@ -5,13 +5,4 @@ main.py: Handles the backend operations, setting up the FastAPI server, defining
 
 home.html: Provides the frontend interface where users can enter a location and view the retrieved weather data.
 
-How to Run
-Clone the repository.
 
-Install the required dependencies: pip install fastapi uvicorn requests jinja2.
-
-Set your OpenWeather API key in main.py.
-
-Run the FastAPI server: uvicorn main:app --reload.
-
-Open your browser and navigate to http://127.0.0.1:8000
